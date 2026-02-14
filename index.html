@@ -1,15 +1,29 @@
-<audio id="a" autoplay>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Авто-звук</title>
+</head>
+<body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh; background:#111; color:#fff; font-family:sans-serif;">
+
+<h1>Кликни куда угодно, если звук не стартовал</h1>
+
+<audio id="audio" autoplay>
   <source src="sound.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-window.addEventListener("load", () => {
-  const audio = document.getElementById("a");
-  const playPromise = audio.play();
-  if (playPromise !== undefined) {
+const audio = document.getElementById("audio");
+
+// Пытаемся сразу играть
+const playPromise = audio.play();
+if (playPromise !== undefined) {
     playPromise.catch(() => {
-      document.body.addEventListener("click", () => audio.play(), { once: true });
+        // Если заблокировал браузер, запускаем при клике на страницу
+        document.body.addEventListener("click", () => audio.play(), { once: true });
     });
-  }
-});
+}
 </script>
+
+</body>
+</html>
